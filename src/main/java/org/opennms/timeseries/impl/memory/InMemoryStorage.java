@@ -36,12 +36,12 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
-import org.opennms.integration.api.v1.timeseries.TimeSeriesStorage;
 import org.opennms.integration.api.v1.timeseries.Aggregation;
 import org.opennms.integration.api.v1.timeseries.Metric;
 import org.opennms.integration.api.v1.timeseries.Sample;
 import org.opennms.integration.api.v1.timeseries.Tag;
 import org.opennms.integration.api.v1.timeseries.TimeSeriesFetchRequest;
+import org.opennms.integration.api.v1.timeseries.TimeSeriesStorage;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -103,5 +103,10 @@ public class InMemoryStorage implements TimeSeriesStorage {
     public void delete(Metric metric) {
         Objects.requireNonNull(metric);
         this.data.remove(metric);
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName();
     }
 }

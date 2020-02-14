@@ -10,5 +10,7 @@ It is not meant for production use.
 ## Usage
 * compile: ``mvn install``
 * activation: Please see here for a description how to activate a timeseries database in OpenNMS: TODO Patrick
+* activate in Karaf shell: ``bundle:install -s mvn:org.opennms.plugins.timeseries.inmemory/timeseries-inmemory-plugin/1.0.0-SNAPSHOT``
+
 
 
