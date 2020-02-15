@@ -1,4 +1,4 @@
-# Timeseries Integration InMemory
+# Timeseries Integration InMemory Plugin
 
 This plugin exposes a simple implementation of the TimeSeriesStorage interface.
 It holds the data in a Guava cache.
@@ -9,7 +9,7 @@ It is not meant for production use.
 
 ## Usage
 * compile: ``mvn install``
-* activation: Please see here for a description how to activate a timeseries database in OpenNMS: TODO Patrick
+* activation: Enable the timeseries integration layer: TODO: Patrick add link once the documentation is online
 * activate in Karaf shell: ``bundle:install -s mvn:org.opennms.plugins.timeseries.inmemory/timeseries-inmemory-plugin/1.0.0-SNAPSHOT``
 
 

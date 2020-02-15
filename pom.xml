@@ -43,6 +43,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-RequiredExecutionEnvironment>JavaSE-${java.version}</Bundle-RequiredExecutionEnvironment>
+                        <Export-Package>org.opennms.timeseries.impl.memory</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
