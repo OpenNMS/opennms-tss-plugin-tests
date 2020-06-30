@@ -36,9 +36,11 @@ jobs:
           when: always
 
       - sign-packages/install-deb-dependencies:
+          use_sudo: true
           skip_if_forked_pr: true
 
       - sign-packages/setup-env:
+          use_sudo: true
           skip_if_forked_pr: true
 
       - run:
