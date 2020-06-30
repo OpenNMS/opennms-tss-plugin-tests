@@ -35,7 +35,7 @@ jobs:
             find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
           when: always
 
-      - sign-packages/install-rpm-dependencies:
+      - sign-packages/install-deb-dependencies:
           skip_if_forked_pr: true
 
       - sign-packages/setup-env:
