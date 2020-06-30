@@ -67,6 +67,8 @@ jobs:
   deploy:
     executor: build-executor
     steps:
+      - checkout
+
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "pom.xml" }}
