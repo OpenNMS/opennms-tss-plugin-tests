@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  sign-packages: opennms/sign-packages@2.1.3
+  sign-packages: opennms/sign-packages@2.2.0
 
 executors:
   build-executor:
@@ -16,9 +16,9 @@ workflows:
       - build
 
 jobs:
+  context: "OpenNMS Build"
   build:
     executor: build-executor
-    context: "OpenNMS Build"
     steps:
       - checkout
 
@@ -35,10 +35,17 @@ jobs:
             find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
           when: always
 
+      - sign-packages/install-deb-dependencies:
+          skip_if_forked_pr: true
+          use_sudo: true
+
+      - sign-packages/setup-env:
+          skip_if_forked_pr: true
+
       - run:
           name: Upload snapshot
           command: |
-            mvn -Prelease clean deploy
+            mvn -Prelease -DskipTests clean deploy
 
       # Save dependency cache
       - save_cache:
