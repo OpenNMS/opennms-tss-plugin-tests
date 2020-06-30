@@ -13,7 +13,7 @@ executors:
 workflows:
   build-deploy:
     jobs:
-      - build
+      - build:
           context: "OpenNMS Build"
 
 jobs:
