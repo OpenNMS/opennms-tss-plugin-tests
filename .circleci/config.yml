@@ -17,8 +17,8 @@ workflows:
 
 jobs:
   build:
+    context: "OpenNMS Build"
     executor: build-executor
-    # context: "OpenNMS Build"
     steps:
       - checkout
 
