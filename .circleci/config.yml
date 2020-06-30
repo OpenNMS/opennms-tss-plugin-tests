@@ -15,6 +15,9 @@ workflows:
     jobs:
       - build:
           context: "OpenNMS Build"
+      - deploy:
+          context: "OSSRH Principal"
+
 
 jobs:
   build:
@@ -42,10 +45,10 @@ jobs:
       - sign-packages/setup-env:
           skip_if_forked_pr: true
 
-      - run:
-          name: Upload snapshot
-          command: |
-            mvn -Prelease -DskipTests clean deploy
+#      - run:
+#         name: Upload snapshot
+#          command: |
+#            mvn -Prelease -DskipTests clean deploy
 
       # Save dependency cache
       - save_cache:
@@ -61,3 +64,14 @@ jobs:
           paths:
             - project
 
+  deploy:
+    executor: build-executor
+    steps:
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "pom.xml" }}
+
+      - run:
+          name: Upload snapshot
+          command: |
+            mvn -Prelease -DskipTests -Dmaven.install.skip=true deploy
