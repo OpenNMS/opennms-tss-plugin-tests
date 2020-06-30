@@ -1,4 +1,4 @@
-# Timeseries Storage Plugin Tests
+# Timeseries Storage Plugin Tests [![CircleCI](https://circleci.com/gh/OpenNMS/org.opennms.plugins.tss.plugin-tests.svg?style=svg)](https://circleci.com/gh/OpenNMS/org.opennms.plugins.tss.plugin-tests)
 
 This repository contains tools to test Time Series Storage Plugins.
 
