@@ -80,7 +80,7 @@ public abstract class AbstractStorageIntegrationTest {
     abstract protected TimeSeriesStorage createStorage();
 
     protected void waitForPersistingChanges() {
-        // override and add a wait if persisting is not handled synchronously
+        // override and add a wait in case persisting is not handled synchronously
     }
 
     @Test
