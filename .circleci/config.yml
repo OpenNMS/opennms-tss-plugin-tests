@@ -17,6 +17,8 @@ workflows:
           context: "OpenNMS Build"
       - deploy:
           context: "OSSRH Principal"
+          requires:
+            - build
 
 
 jobs:
@@ -77,4 +79,4 @@ jobs:
       - run:
           name: Upload snapshot
           command: |
-            mvn -DskipTests -Dmaven.verify.skip=true -Dmaven.install.skip=true deploy
+            mvn -s .circleci/settings.xml -DskipTests -Dmaven.verify.skip=true -Dmaven.install.skip=true deploy
