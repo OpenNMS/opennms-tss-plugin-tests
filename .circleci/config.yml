@@ -77,4 +77,4 @@ jobs:
       - run:
           name: Upload snapshot
           command: |
-            mvn -Prelease -DskipTests -Dmaven.verify.skip=true -Dmaven.install.skip=true deploy
+            mvn -DskipTests -Dmaven.verify.skip=true -Dmaven.install.skip=true deploy
