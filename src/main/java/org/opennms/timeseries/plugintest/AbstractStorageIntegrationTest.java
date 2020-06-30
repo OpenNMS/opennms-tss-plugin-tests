@@ -46,7 +46,6 @@ import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
 import org.opennms.integration.api.v1.timeseries.Aggregation;
-import org.opennms.integration.api.v1.timeseries.IntrinsicTagNames;
 import org.opennms.integration.api.v1.timeseries.Metric;
 import org.opennms.integration.api.v1.timeseries.Sample;
 import org.opennms.integration.api.v1.timeseries.StorageException;
@@ -87,7 +86,7 @@ public abstract class AbstractStorageIntegrationTest {
     @Test
     public void shouldLoadMultipleMetricsWithSameTag() throws StorageException {
         List<Metric> metricsRetrieved = storage.getMetrics(asList(
-                metrics.get(0).getFirstTagByKey(IntrinsicTagNames.name),
+                metrics.get(0).getFirstTagByKey("name"),
                 new ImmutableTag("_idx1", "(snmp:1,4)")));
         assertEquals(metrics.size(), metricsRetrieved.size());
         assertEquals(new HashSet<>(metrics), new HashSet<>(metricsRetrieved));
@@ -97,8 +96,8 @@ public abstract class AbstractStorageIntegrationTest {
     public void shouldLoadOneMetricsWithUniqueTag() throws StorageException {
         Metric metric = metrics.get(0);
         List<Metric> metricsRetrieved = storage.getMetrics(asList(
-                metric.getFirstTagByKey(IntrinsicTagNames.name),
-                metric.getFirstTagByKey(IntrinsicTagNames.resourceId)));
+                metric.getFirstTagByKey("name"),
+                metric.getFirstTagByKey("resourceId")));
         assertEquals(1, metricsRetrieved.size());
 
         Metric metricFromDb = metricsRetrieved.get(0);
@@ -111,8 +110,8 @@ public abstract class AbstractStorageIntegrationTest {
     @Test
     public void shouldLoadMetricsByWildcardTag() throws StorageException {
         List<Metric> metricsRetrieved = storage.getMetrics(asList(
-                metrics.get(0).getFirstTagByKey(IntrinsicTagNames.name),
-                new ImmutableTag("_idx2*", "(snmp:1,*)")));
+                metrics.get(0).getFirstTagByKey("name"),
+                new ImmutableTag("_idx2w", "(snmp:1,*)")));
         assertEquals(metrics.size(), metricsRetrieved.size());
         assertEquals(new HashSet<>(metrics), new HashSet<>(metricsRetrieved));
     }
@@ -140,7 +139,7 @@ public abstract class AbstractStorageIntegrationTest {
         Metric lastMetric = metrics.get(metrics.size()-1);
 
         // make sure we have the metrics and the samples in the db:
-        List<Metric> metricsRetrieved = storage.getMetrics(singletonList(this.metrics.get(0).getFirstTagByKey(IntrinsicTagNames.name)));
+        List<Metric> metricsRetrieved = storage.getMetrics(singletonList(this.metrics.get(0).getFirstTagByKey("name")));
         assertEquals(new HashSet<>(metrics), new HashSet<>(metricsRetrieved));
         List<Sample> samples = loadSamplesForMetric(lastMetric);
         assertEquals(samplesOfFirstMetric.size(), samples.size());
@@ -155,7 +154,7 @@ public abstract class AbstractStorageIntegrationTest {
         assertEquals(0, samples.size());
 
         // check the rest of metrics, they should still be there
-        metricsRetrieved = storage.getMetrics(singletonList(this.metrics.get(0).getFirstTagByKey(IntrinsicTagNames.name)));
+        metricsRetrieved = storage.getMetrics(singletonList(this.metrics.get(0).getFirstTagByKey("name")));
         assertEquals(new HashSet<>(metrics.subList(0, metrics.size()-1)), new HashSet<>(metricsRetrieved));
         samples = loadSamplesForMetric(metrics.get(0));
         assertEquals(samplesOfFirstMetric, samples);
@@ -201,11 +200,11 @@ public abstract class AbstractStorageIntegrationTest {
     private static Metric createMetric(final String uuid, final int nodeId) {
         return ImmutableMetric.builder()
                 .intrinsicTag("name", uuid)
-                .intrinsicTag(IntrinsicTagNames.resourceId, String.format("snmp:%s:opennms-jvm:org_opennms_newts_name_ring_buffer_max_size_unit=unknown", nodeId))
-                .metaTag(IntrinsicTagNames.mtype, Metric.Mtype.gauge.name())
+                .intrinsicTag("resourceId", String.format("snmp:%s:opennms-jvm:org_opennms_newts_name_ring_buffer_max_size_unit=unknown", nodeId))
+                .metaTag("mtype", Metric.Mtype.gauge.name())
                 .metaTag("_idx0", "(snmp,4)")
                 .metaTag("_idx1", "(snmp:1,4)")
-                .metaTag("_idx2*", "(snmp:1,*)")
+                .metaTag("_idx2w", "(snmp:1,*)")
                 .metaTag("_idx2", "(snmp:1:opennms-jvm,4)")
                 .metaTag("_idx3", "(snmp:1:opennms-jvm:OpenNMS_Name_Notifd,4)")
                 .metaTag("host", "myHost" + nodeId)
