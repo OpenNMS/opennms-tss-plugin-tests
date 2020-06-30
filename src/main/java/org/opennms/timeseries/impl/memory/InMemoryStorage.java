@@ -47,7 +47,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
 /**
- * Simulates a timeseries storage in memory (Guava cache). The implementation is super simple and not very efficient.
+ * Simulates a time series storage in memory (Guava cache). The implementation is super simple and not very efficient.
  * For testing and evaluating purposes only, not for production.
  */
 public class InMemoryStorage implements TimeSeriesStorage {
@@ -60,7 +60,7 @@ public class InMemoryStorage implements TimeSeriesStorage {
     }
 
     @Override
-    public void store(List<Sample> samples) {
+    public void store(final List<Sample> samples) {
         Objects.requireNonNull(samples);
         for(Sample sample : samples) {
             Collection<Sample> timeseries = data.computeIfAbsent(sample.getMetric(), k -> new ConcurrentLinkedQueue<>());

@@ -2,7 +2,7 @@
 
 This repository contains tools to test Time Series Storage Plugins.
 
-It also offers a simple in memory implementation of a time series storage plugin as reference and to try out the time series integration layer in opennms
+It also offers a simple in memory implementation of a time series storage plugin as reference and to try out the time series integration layer in OpenNMS.
 
 ## Tests
 We have developed a set of test cases to check if a plugin implementation works properly.
