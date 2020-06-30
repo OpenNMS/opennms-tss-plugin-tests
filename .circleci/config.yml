@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Upload snapshot
           command: |
-            mvn -Prelease clean deploy
+            mvn -Prelease -DskipTests clean deploy
 
       # Save dependency cache
       - save_cache:
