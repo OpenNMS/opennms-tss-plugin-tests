@@ -12,12 +12,12 @@ executors:
 
 workflows:
   build-deploy:
+    context: "OpenNMS Build"
     jobs:
       - build
 
 jobs:
   build:
-    context: "OpenNMS Build"
     executor: build-executor
     steps:
       - checkout
