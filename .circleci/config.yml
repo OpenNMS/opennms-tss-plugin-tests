@@ -14,7 +14,7 @@ workflows:
   build-deploy:
     jobs:
       - build
-        context: "OpenNMS Build"
+          context: "OpenNMS Build"
 
 jobs:
   build:
