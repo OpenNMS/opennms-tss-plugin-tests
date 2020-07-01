@@ -189,7 +189,7 @@ public abstract class AbstractStorageIntegrationTest {
     }
 
     private static List<Metric> createRandomMetrics() {
-        final String uuid = UUID.randomUUID().toString();
+        final String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         List<Metric> metrics = new ArrayList<>();
         for(int i=1; i<5; i++) {
             metrics.add(createMetric(uuid, i));
