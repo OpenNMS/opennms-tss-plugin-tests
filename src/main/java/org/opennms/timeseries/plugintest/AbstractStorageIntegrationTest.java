@@ -199,7 +199,7 @@ public abstract class AbstractStorageIntegrationTest {
 
     private static Metric createMetric(final String uuid, final int nodeId) {
         return ImmutableMetric.builder()
-                .intrinsicTag("name", uuid)
+                .intrinsicTag("name", "n" + uuid) // make sure the name starts with a letter and not a number
                 .intrinsicTag("resourceId", String.format("snmp:%s:opennms-jvm:org_opennms_newts_name_ring_buffer_max_size_unit=unknown", nodeId))
                 .metaTag("mtype", Metric.Mtype.gauge.name())
                 .metaTag("_idx0", "(snmp,4)")
