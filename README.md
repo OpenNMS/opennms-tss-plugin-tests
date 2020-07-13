@@ -1,3 +1,6 @@
+# Deprecated.
+Moved to: https://github.com/OpenNMS/opennms-integration-api/tree/master/test-suites/tss-tests
+
 # Time Series Storage Plugin Tests [![CircleCI](https://circleci.com/gh/OpenNMS/opennms-tss-plugin-tests.svg?style=svg)](https://circleci.com/gh/OpenNMS/opennms-tss-plugin-tests)
 
 This repository contains tools to test Time Series Storage Plugins.
